@@ -1,12 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import { MakeStore } from './store'
-import IdentityForm from './IdentityForm'
+import Input from './Input'
+import Hello from './Hello'
 
-const store = MakeStore()
-
-function App () {
-  return <IdentityForm store={store}/>
-}
-
-render(<App />, document.getElementById('root'));
+render(<Provider store={MakeStore()}>
+    <div>
+      <Input />
+      <Hello />
+    </div>
+  </Provider>,
+  document.getElementById('root'))

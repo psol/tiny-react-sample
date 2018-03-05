@@ -1,1 +1,9 @@
-export const UPDATE_IDENTITY_FIELD = 'UPDATE_IDENTITY_FIELD'
+export const CHANGE_FIELD = 'CHANGE_FIELD'
+
+export function Change (field, value) {
+  return {
+    type: CHANGE_FIELD,
+    field,
+    value
+  }
+}
