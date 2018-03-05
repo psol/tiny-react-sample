@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
-import MakeStore from './store'
+import { MakeStore } from './store'
 import IdentityForm from './IdentityForm'
 
 const store = MakeStore()
 
-function App (props) {
+function App () {
   return <IdentityForm store={store}/>
 }
 
