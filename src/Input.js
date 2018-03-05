@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Change } from './actions'
+import { Change } from './store'
 
 function Input (props) {
   return <form>

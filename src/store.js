@@ -1,16 +1,21 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { CHANGE_FIELD } from './actions'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
-function person (state, action) {
+const CHANGE_FIELD = 'CHANGE_FIELD'
+
+export function Change (field, value) {
+  return {
+    type: CHANGE_FIELD,
+      field,
+      value
+  }
+}
+
+export function reducer (state, action) {
   switch (action.type) {
     case CHANGE_FIELD:
       return { person: Object.assign({}, state.person, { [action.field]: action.value }) }
     default:
       return state
   }
-}
-
-export function MakeStore () {
-  return createStore(person, { person: { first: '', last: '' } }, applyMiddleware(thunk))
 }
