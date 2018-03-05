@@ -1,6 +1,3 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-
 const CHANGE_FIELD = 'CHANGE_FIELD'
 
 export function Change (field, value) {
