@@ -2,15 +2,15 @@ import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { CHANGE_FIELD } from './actions'
 import thunk from 'redux-thunk'
 
-function identity (state, action) {
+function person (state, action) {
   switch (action.type) {
     case CHANGE_FIELD:
-      return Object.assign({}, state, { [action.field]: action.value })
+      return { person: Object.assign({}, state.person, { [action.field]: action.value }) }
     default:
       return state
   }
 }
 
 export function MakeStore () {
-  return createStore(identity, { first: '', last: '' }, applyMiddleware(thunk))
+  return createStore(person, { person: { first: '', last: '' } }, applyMiddleware(thunk))
 }

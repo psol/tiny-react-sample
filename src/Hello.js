@@ -11,4 +11,4 @@ Hello.propTypes = {
   'last': PropTypes.string.isRequired
 }
 
-export default connect(state => state)(Hello)
+export default connect(state => state.person)(Hello)
