@@ -7,15 +7,16 @@ function Input (props) {
   return <form>
       <span>First, last name:</span>
       <input value={props.first}
-        onChange={(e) => props.dispatch(Change('first', e.target.value))} />
+        onChange={e => props.dispatch(Change('first', e.target.value))} />
       <input value={props.last}
-        onChange={(e) => props.dispatch(Change('last', e.target.value))}/>
+        onChange={e => props.dispatch(Change('last', e.target.value))} />
     </form>
 }
 
 Input.propTypes = {
-  'first': PropTypes.string.isRequired,
-  'last': PropTypes.string.isRequired
+  first: PropTypes.string.isRequired,
+  last: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect(state => state.person)(Input)
