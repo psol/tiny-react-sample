@@ -18,6 +18,7 @@ function GitHub(props) {
 GitHub.propTypes = {
   results: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       url: PropTypes.string.isRequired,
       login: PropTypes.string.isRequired
     })
@@ -25,4 +26,8 @@ GitHub.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect(state => { return { results: state.github } })(GitHub)
+function mapStateToProps(state) {
+  return { results: state.github }
+}
+
+export default connect(mapStateToProps)(GitHub)

@@ -12,8 +12,7 @@ export function Change (field, value) {
 function receiveResults (results) {
   return {
     type: RECEIVE_RESULTS,
-    query: results[0],
-    results: results
+    results
   }
 }
 
