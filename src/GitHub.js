@@ -19,7 +19,7 @@ GitHub.propTypes = {
   results: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      url: PropTypes.string.isRequired,
+      html_url: PropTypes.string.isRequired,
       login: PropTypes.string.isRequired
     })
   ).isRequired,
