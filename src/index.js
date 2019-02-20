@@ -1,12 +1,20 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { MakeStore } from './store'
-import IdentityForm from './IdentityForm'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { reducer } from './store'
+import Input from './Input'
+import Hello from './Hello'
+import GitHub from './GitHub'
 
-const store = MakeStore()
+const store = createStore(reducer, { person: { first: '', last: '' }, github: [] }, applyMiddleware(thunk))
 
-function App () {
-  return <IdentityForm store={store}/>
-}
-
-render(<App />, document.getElementById('root'));
+render(<Provider store={store}>
+    <div>
+      <Input />
+      <Hello />
+      <GitHub />
+    </div>
+  </Provider>,
+  document.getElementById('root'))

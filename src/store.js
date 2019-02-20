@@ -1,23 +1,41 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { UPDATE_IDENTITY_FIELD } from './actions'
-import thunk from 'redux-thunk'
+const CHANGE_FIELD = 'CHANGE_FIELD'
+const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
 
-function identity (state = { first: '', last: '' }, action) {
-  switch (action.type) {
-    case UPDATE_IDENTITY_FIELD:
-      if(action.field) {
-        return Object.assign({}, state, {[action.field]: action.value)        
-      }
-      else ; // falls to default
-    default:
-      return state
+export function Change (field, value) {
+  return {
+    type: CHANGE_FIELD,
+    field,
+    value
   }
 }
 
-const reducers = combineReducers({
-  identity: () => identity
-})
+function receiveResults (results) {
+  return {
+    type: RECEIVE_RESULTS,
+    results
+  }
+}
 
-export function MakeStore () {
-  return createStore(reducers, { identity: {} }, applyMiddleware(think))
+export function Search () {
+  return function (dispatch, getState) {
+    const person = getState().person
+    const query = (person.first + ' ' + person.last).trim()
+    if(query.length > 0) {
+      return fetch(encodeURI(`https://api.github.com/search/users?q=${query}`))
+        .then(response => response.json())
+        .then(json => dispatch(receiveResults(json)))
+    }
+    else return Promise.resolve()
+  }
+}
+
+export function reducer (state, action) {
+  switch (action.type) {
+    case CHANGE_FIELD:
+      return { person: {...state.person, [action.field]: action.value }, github: state.github }
+    case RECEIVE_RESULTS:
+      return { person: state.person, github: action.results.items }
+    default:
+      return state
+  }
 }
